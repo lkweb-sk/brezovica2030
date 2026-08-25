@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="sk" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vízia pre Brezovicu 2030 | Nezávislí kandidáti</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        breza: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534', // Primary dark green
+                            900: '#14532d',
+                        },
+                        accent: {
+                            500: '#eab308', // Gold/Yellow accent
+                            600: '#ca8a04',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom styles for hidden elements and animations */
+        .mobile-menu-active { transform: translateX(0%); }
+        .mobile-menu-hidden { transform: translateX(100%); }
+        .accordion-content { transition: max-height 0.3s ease-out, padding 0.3s ease; max-height: 0; overflow: hidden; }
+        .accordion-content.open { max-height: 500px; } /* Arbitrary large max-height for transition */
+        .glass-nav { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); }
+    </style>
+</head>
+<body class="font-sans text-gray-800 antialiased bg-gray-50">
+
+    <nav class="fixed w-full z-50 glass-nav border-b border-gray-200 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <!-- Logo / Title -->
+                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <div class="w-10 h-10 bg-breza-700 text-white rounded-lg flex items-center justify-center font-bold text-xl shadow-lg">B</div>
+                    <span class="font-bold text-xl tracking-tight text-breza-900">Brezovica <span class="text-accent-600">2030</span></span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#kto-sme" class="text-gray-600 hover:text-breza-700 font-medium transition-colors">Kto sme</a>
+                    <a href="#hodnoty" class="text-gray-600 hover:text-breza-700 font-medium transition-colors">Hodnoty</a>
+                    <a href="#vizia" class="text-gray-600 hover:text-breza-700 font-medium transition-colors">Naša vízia</a>
+                    <a href="#hospodarenie" class="text-gray-600 hover:text-breza-700 font-medium transition-colors">Hospodárenie</a>
+                    <a href="#kontakt" class="bg-breza-700 hover:bg-breza-800 text-white px-5 py-2 rounded-full font-medium transition-colors shadow-md">Kontakt</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-breza-700 focus:outline-none p-2">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="fixed inset-0 bg-white z-40 mobile-menu-hidden transition-transform duration-300 ease-in-out md:hidden flex flex-col pt-24 px-6 shadow-2xl h-screen">
+            <button id="close-menu-btn" class="absolute top-6 right-6 text-gray-600 p-2">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            <div class="flex flex-col space-y-6 text-xl text-center mt-10">
+                <a href="#kto-sme" class="mobile-link font-semibold text-gray-800 hover:text-breza-700">Kto sme</a>
+                <a href="#hodnoty" class="mobile-link font-semibold text-gray-800 hover:text-breza-700">Naše hodnoty</a>
+                <a href="#vizia" class="mobile-link font-semibold text-gray-800 hover:text-breza-700">Naša vízia do 2030</a>
+                <a href="#hospodarenie" class="mobile-link font-semibold text-gray-800 hover:text-breza-700">Stav hospodárenia</a>
+                <a href="#kontakt" class="mobile-link bg-breza-700 text-white py-3 rounded-xl font-bold shadow-lg mt-4">Zapojte sa</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="relative pt-20 pb-32 lg:pt-48 lg:pb-64 overflow-hidden flex items-center min-h-[90vh]">
+        <!-- Background Image with Overlay -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://www.brezovica.sk/data/headerfooter/header_images/dji0135.jpg" alt="Príroda a dedina" class="w-full h-full object-cover object-center" />
+            <div class="absolute inset-0 bg-gradient-to-r from-breza-900/90 to-breza-800/70 mix-blend-multiply"></div>
+        </div>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center lg:text-left flex flex-col lg:flex-row items-center">
+            <div class="lg:w-2/3">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white font-medium mb-6">
+                    <span class="w-2 h-2 rounded-full bg-accent-500 animate-pulse"></span>
+                    Komunálne voľby: 24. Október 2026
+                </div>
+                <h1 class="text-4xl sm:text-5xl lg:text-7xl font-extrabold text-white tracking-tight mb-6 leading-tight">
+                    Spoločne za rozvoj <br class="hidden lg:block"/> <span class="text-accent-500">Brezovice</span>
+                </h1>
+                <p class="text-lg sm:text-xl text-gray-200 mb-10 max-w-2xl mx-auto lg:mx-0 font-light leading-relaxed">
+                    Sme tím troch nezávislých kandidátov. Máme jasný plán, skúsenosti z praxe a spoločný cieľ: vytvoriť z Brezovice modernú, transparentnú a prosperujúcu obec pre všetky generácie.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                    <a href="#vizia" class="bg-accent-500 hover:bg-accent-600 text-breza-900 font-bold px-8 py-4 rounded-full transition-transform hover:scale-105 shadow-xl text-lg text-center">
+                        Spoznajte náš program
+                    </a>
+                    <a href="#kto-sme" class="bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/30 text-white font-medium px-8 py-4 rounded-full transition-colors shadow-lg text-lg text-center">
+                        Kto sme?
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Shape divider -->
+        <div class="absolute bottom-0 w-full overflow-hidden leading-none z-10">
+            <svg class="relative block w-full h-[50px] lg:h-[100px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C59.71,118.08,130.83,123.15,200.7,110.39,242.72,102.73,283.47,82.8,321.39,56.44Z" fill="#f9fafb"></path>
+            </svg>
+        </div>
+    </header>
+
+    <section id="kto-sme" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-breza-900 sm:text-4xl mb-4">Náš tím pre Brezovicu</h2>
+                <div class="w-20 h-1 bg-accent-500 mx-auto rounded-full mb-6"></div>
+                <p class="max-w-2xl mx-auto text-xl text-gray-600">
+                    Sme obyvatelia tejto obce, ktorým záleží na jej budúcnosti. Spájame odborné znalosti z rôznych oblastí.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-10">
+                <!-- Candidate 1 -->
+                <div class="bg-white rounded-3xl shadow-xl overflow-hidden transform transition duration-300 hover:-translate-y-2 group">
+                    <div class="relative h-64">
+                        <img src="https://img.magnific.com/free-photo/handsome-young-cheerful-man-with-arms-crossed_171337-1073.jpg?semt=ais_hybrid&w=740&q=80" alt="Kandidát 1" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+                            <span class="text-white text-sm font-medium">Manažér v IT sektore</span>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Mário Kubášek</h3>
+                        <p class="text-accent-600 font-semibold mb-4 text-sm uppercase tracking-wider">Kandidát na poslanca</p>
+                        <p class="text-gray-600 mb-6">
+                            "Do obecného zastupiteľstva chcem priniesť moderné prístupy k riadeniu a transparentnosť. Mojou prioritou je digitalizácia služieb obce."
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Candidate 2 -->
+                <div class="bg-white rounded-3xl shadow-xl overflow-hidden transform transition duration-300 hover:-translate-y-2 group">
+                    <div class="relative h-64">
+                        <img src="https://img.magnific.com/free-photo/handsome-young-cheerful-man-with-arms-crossed_171337-1073.jpg?semt=ais_hybrid&w=740&q=80" alt="Kandidát 2" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+                            <span class="text-white text-sm font-medium">Ekonómka a účtovníčka</span>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Bc. Libor Gasper</h3>
+                        <p class="text-accent-600 font-semibold mb-4 text-sm uppercase tracking-wider">Kandidát na poslanca</p>
+                        <p class="text-gray-600 mb-6">
+                            "Zdravé financie sú základom rozvoja. Chcem dohliadať na efektívne čerpanie rozpočtu a získavanie nových grantov pre našu školu a škôlku."
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Candidate 3 -->
+                <div class="bg-white rounded-3xl shadow-xl overflow-hidden transform transition duration-300 hover:-translate-y-2 group">
+                    <div class="relative h-64">
+                        <img src="https://img.magnific.com/free-photo/handsome-young-cheerful-man-with-arms-crossed_171337-1073.jpg?semt=ais_hybrid&w=740&q=80" alt="Kandidát 3" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+                            <span class="text-white text-sm font-medium">Architekt a urbanista</span>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Lukáš Kanik</h3>
+                        <p class="text-accent-600 font-semibold mb-4 text-sm uppercase tracking-wider">Kandidát na poslanca</p>
+                        <p class="text-gray-600 mb-6">
+                            "Záleží mi na verejných priestoroch, zeleni a zmysluplnej výstavbe. Brezovica musí rásť, ale nesmie stratiť svoj charakter a atmosféru."
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="hodnoty" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <h2 class="text-3xl font-bold text-breza-900 sm:text-4xl mb-6">Naše princípy práce</h2>
+                    <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                        Nesľubujeme vzdušné zámky. Náš program je postavený na reálnych dátach a pevných hodnotách. Ako poslanci budeme v prvom rade zástupcami vás, občanov.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-breza-100 flex items-center justify-center text-breza-700">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold text-gray-900">Absolútna transparentnosť</h4>
+                                <p class="text-gray-600 mt-1">Zverejňovanie všetkých zmlúv a faktúr prehľadne a online. Obecné peniaze sú peniaze nás všetkých.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-breza-100 flex items-center justify-center text-breza-700">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold text-gray-900">Otvorená komunikácia</h4>
+                                <p class="text-gray-600 mt-1">Pravidelné stretnutia s občanmi, online ankety pri dôležitých rozhodnutiach a aktívna prítomnosť v teréne.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-breza-100 flex items-center justify-center text-breza-700">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold text-gray-900">Odbornosť a inovácie</h4>
+                                <p class="text-gray-600 mt-1">Rozhodnutia podložené dátami, využívanie moderných technológií a externých grantov na rozvoj.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="relative hidden lg:block">
+                    <div class="absolute inset-0 bg-breza-600 rounded-3xl transform rotate-3 scale-105 opacity-20"></div>
+                    <img src="https://www.brezovica.sk/data/headerfooter/header_images/dji0426.jpg" alt="Komunita" class="relative rounded-3xl shadow-2xl object-cover h-[500px] w-full">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="vizia" class="py-20 bg-breza-900 text-white relative">
+        <!-- Decorative SVG background -->
+        <div class="absolute inset-0 opacity-10">
+            <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                <defs><pattern id="polka-dots" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse"><circle fill="#ffffff" cx="20" cy="20" r="2"></circle></pattern></defs>
+                <rect x="0" y="0" width="100%" height="100%" fill="url(#polka-dots)"></rect>
+            </svg>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold sm:text-4xl mb-4">Vízia Brezovica 2030</h2>
+                <div class="w-20 h-1 bg-accent-500 mx-auto rounded-full mb-6"></div>
+                <p class="max-w-3xl mx-auto text-xl text-breza-100">
+                    Sústredili sme náš program do štyroch hlavných pilierov. Každý obsahuje konkrétne projekty, ktoré chceme v obci počas volebného obdobia realizovať.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8">
+                
+                <!-- Pillar 1: Rozvoj infraštruktúry -->
+                <div class="bg-white text-gray-800 rounded-2xl shadow-lg p-6 sm:p-8">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="p-3 bg-breza-100 rounded-lg text-breza-700">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900">Rozvoj infraštruktúry</h3>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div class="border border-gray-200 rounded-xl overflow-hidden">
+                            <button class="accordion-btn w-full px-5 py-4 text-left flex justify-between items-center bg-gray-50 hover:bg-gray-100 transition-colors">
+                                <span class="font-bold text-gray-900">1. Vysporiadanie pozemkov</span>
+                                <svg class="w-5 h-5 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </button>
+                            <div class="accordion-content px-5 text-gray-600 bg-white">
+                                <p class="py-3 border-t border-gray-100">Urýchlenie vysporiadania kľúčových pozemkov v obci, kľúčové pre získanie grantov a eurofondov na rôzne projekty.</p>
+                            </div>
+                        </div>
+                        <div class="border border-gray-200 rounded-xl overflow-hidden">
+                            <button class="accordion-btn w-full px-5 py-4 text-left flex justify-between items-center bg-gray-50 hover:bg-gray-100 transition-colors">
+                                <span class="font-bold text-gray-900">2. Úsporná prevádzka verejných budov a osvetlenia</span>
+                                <svg class="w-5 h-5 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </button>
+                            <div class="accordion-content px-5 text-gray-600 bg-white">
+                                <p class="py-3 border-t border-gray-100">Výmena starých svietidiel za inteligentné, energeticky úsporné LED osvetlenie. Možnosť znížiť náklady na osvetlenie až o 40% a obmedziť svetelný smog.</p>
+                            </div>
+                        </div>
+                        <div class="border border-gray-200 rounded-xl overflow-hidden">
+                            <button class="accordion-btn w-full px-5 py-4 text-left flex justify-between items-center bg-gray-50 hover:bg-gray-100 transition-colors">
+                                <span class="font-bold text-gray-900">3. Energetická sebestačnosť</span>
+                                <svg class="w-5 h-5 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </button>
+                            <div class="accordion-content px-5 text-gray-600 bg-white">
+                                <p class="py-3 border-t border-gray-100">Vybudovanie fotovoltaickej elektrárne na budove školy pre využívanie energie zo slnka pre školu a obecné budovy pre radikálne zníženie účtu za elektrinu.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pillar 2: Životné prostredie -->
+                <div class="bg-white text-gray-800 rounded-2xl shadow-lg p-6 sm:p-8">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="p-3 bg-breza-100 rounded-lg text-breza-700">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900">Zeleň a životné prostredie</h3>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div class="border border-gray-200 rounded-xl overflow-hidden">
+                            <button class="accordion-btn w-full px-5 py-4 text-left flex justify-between items-center bg-gray-50 hover:bg-gray-100 transition-colors">
+                                <span class="font-bold text-gray-900">1. Revitalizácia okolia obce</span>
+                                <svg class="w-5 h-5 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </button>
+                            <div class="accordion-content px-5 text-gray-600 bg-white">
+                                <p class="py-3 border-t border-gray-100">Výsadba nových stromov (najmä tradičných briez), doplnenie lavičiek a smetných košov. Vytvorenie oddychových zón a údržba lesných ciest.</p>
+                            </div>
+                        </div>
+                        <div class="border border-gray-200 rounded-xl overflow-hidden">
+                            <button class="accordion-btn w-full px-5 py-4 text-left flex justify-between items-center bg-gray-50 hover:bg-gray-100 transition-colors">
+                                <span class="font-bold text-gray-900">2. Zberný dvor</span>
+                                <svg class="w-5 h-5 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </button>
+                            <div class="accordion-content px-5 text-gray-600 bg-white">
+                                <p class="py-3 border-t border-gray-100">Z eurofondov je možné vytvoriť moderný zberný dvor na triedenie odpadu a radikálne zníženie nákladov na odpadové hospodárstvo.</p>
+                            </div>
+                        </div>
+                        <div class="border border-gray-200 rounded-xl overflow-hidden">
+                            <button class="accordion-btn w-full px-5 py-4 text-left flex justify-between items-center bg-gray-50 hover:bg-gray-100 transition-colors">
+                                <span class="font-bold text-gray-900">3. Zadržiavanie dažďovej vody</span>
+                                <svg class="w-5 h-5 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </button>
+                            <div class="accordion-content px-5 text-gray-600 bg-white">
+                                <p class="py-3 border-t border-gray-100">Realizácia vodozádržných opatrení a efektívne využívanie vody pre zavlažovanie ihriska a iných plôch.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pillar 3: Komunita -->
+                <div class="bg-white text-gray-800 rounded-2xl shadow-lg p-6 sm:p-8">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="p-3 bg-breza-100 rounded-lg text-breza-700">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900">Komunita, kultúra a šport</h3>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div class="border border-gray-200 rounded-xl overflow-hidden">
+                            <button class="accordion-btn w-full px-5 py-4 text-left flex justify-between items-center bg-gray-50 hover:bg-gray-100 transition-colors">
+                                <span class="font-bold text-gray-900">1. Projekty pre rozvoj detí a mládeže</span>
+                                <svg class="w-5 h-5 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </button>
+                            <div class="accordion-content px-5 text-gray-600 bg-white">
+                                <p class="py-3 border-t border-gray-100">Vytvorenie podmienok pre šport a kultúru pre chlapcov aj dievčatá v rôznych vekových kategóriách.</p>
+                            </div>
+                        </div>
+                        <div class="border border-gray-200 rounded-xl overflow-hidden">
+                            <button class="accordion-btn w-full px-5 py-4 text-left flex justify-between items-center bg-gray-50 hover:bg-gray-100 transition-colors">
+                                <span class="font-bold text-gray-900">2. Podpora športových klubov</span>
+                                <svg class="w-5 h-5 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </button>
+                            <div class="accordion-content px-5 text-gray-600 bg-white">
+                                <p class="py-3 border-t border-gray-100">Rekonštrukcia futbalového ihriska, multifunkčného ihriska pri škole a rozvoj nových aktivít, organizácia športových turnajov.</p>
+                            </div>
+                        </div>
+                        <div class="border border-gray-200 rounded-xl overflow-hidden">
+                            <button class="accordion-btn w-full px-5 py-4 text-left flex justify-between items-center bg-gray-50 hover:bg-gray-100 transition-colors">
+                                <span class="font-bold text-gray-900">3. Cyklotrasy a náučné chodníky</span>
+                                <svg class="w-5 h-5 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </button>
+                            <div class="accordion-content px-5 text-gray-600 bg-white">
+                                <p class="py-3 border-t border-gray-100">Iniciovanie a projektová príprava cyklotrás a náučných chodníkov.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pillar 4: Moderná obec -->
+                <div class="bg-white text-gray-800 rounded-2xl shadow-lg p-6 sm:p-8">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="p-3 bg-breza-100 rounded-lg text-breza-700">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900">Moderná a transparentná obec</h3>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div class="border border-gray-200 rounded-xl overflow-hidden">
+                            <button class="accordion-btn w-full px-5 py-4 text-left flex justify-between items-center bg-gray-50 hover:bg-gray-100 transition-colors">
+                                <span class="font-bold text-gray-900">1. Zapojenie občanov</span>
+                                <svg class="w-5 h-5 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </button>
+                            <div class="accordion-content px-5 text-gray-600 bg-white">
+                                <p class="py-3 border-t border-gray-100">Vytvorenie platformy, do ktorej môžu občania nahlasovať rôzne závady, poškodenia, potrebnú údržbu a iné, pre efektívne riešenie udalostí.</p>
+                            </div>
+                        </div>
+                        <div class="border border-gray-200 rounded-xl overflow-hidden">
+                            <button class="accordion-btn w-full px-5 py-4 text-left flex justify-between items-center bg-gray-50 hover:bg-gray-100 transition-colors">
+                                <span class="font-bold text-gray-900">2. Participatívny rozpočet</span>
+                                <svg class="w-5 h-5 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </button>
+                            <div class="accordion-content px-5 text-gray-600 bg-white">
+                                <p class="py-3 border-t border-gray-100">Vyčlenenie časti rozpočtu (napr. 5 000 €), o ktorom rozhodnú priamo občania v hlasovaní. Podporíme tak komunitné menšie projekty a nápady.</p>
+                            </div>
+                        </div>
+                        <div class="border border-gray-200 rounded-xl overflow-hidden">
+                            <button class="accordion-btn w-full px-5 py-4 text-left flex justify-between items-center bg-gray-50 hover:bg-gray-100 transition-colors">
+                                <span class="font-bold text-gray-900">3. Elektronizácia úradu a znižovanie nákladov</span>
+                                <svg class="w-5 h-5 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </button>
+                            <div class="accordion-content px-5 text-gray-600 bg-white">
+                                <p class="py-3 border-t border-gray-100">Možnosť vybaviť väčšinu žiadostí plne elektronicky, efektívne využívanie služieb a zníženie nákladov na prevádzku obce.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="hospodarenie" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-breza-900 sm:text-4xl mb-4">Aktuálny stav hospodárenia obce</h2>
+                <div class="w-20 h-1 bg-accent-500 mx-auto rounded-full mb-6"></div>
+                <p class="max-w-3xl mx-auto text-xl text-gray-600">
+                    Kľúčom k úspešnému rozvoju je reálne poznať stav našej pokladnice. Analýza, ktorú sme spracovali, ukazuje možnosti, ako hospodáriť efektívnejšie.
+                </p>
+            </div>
+
+            <!-- Financial Stats -->
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 text-center">
+                    <p class="text-gray-500 text-sm uppercase tracking-wide font-semibold mb-2">Rozpočet 2025</p>
+                    <p class="text-3xl font-bold text-gray-900">1.25M €</p>
+                </div>
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 text-center">
+                    <p class="text-gray-500 text-sm uppercase tracking-wide font-semibold mb-2">Aktuálny dlh</p>
+                    <p class="text-3xl font-bold text-red-500">210 000 €</p>
+                    <p class="text-xs text-gray-400 mt-1">16.8% z bežných príjmov</p>
+                </div>
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 text-center">
+                    <p class="text-gray-500 text-sm uppercase tracking-wide font-semibold mb-2">Podielové dane</p>
+                    <p class="text-3xl font-bold text-breza-600">850 000 €</p>
+                </div>
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 text-center">
+                    <p class="text-gray-500 text-sm uppercase tracking-wide font-semibold mb-2">Eurofondy a granty</p>
+                    <p class="text-3xl font-bold text-accent-500">120 000 €</p>
+                    <p class="text-xs text-gray-400 mt-1">Nízke čerpanie - priestor na rast</p>
+                </div>
+            </div>
+
+            <!-- Budget visual -->
+            <div class="bg-white rounded-3xl p-8 shadow-lg border border-gray-100">
+                <h3 class="text-xl font-bold text-gray-900 mb-6">Štruktúra bežných výdavkov</h3>
+                
+                <!-- Visual Bar -->
+                <div class="w-full h-8 flex rounded-full overflow-hidden mb-6">
+                    <div class="bg-breza-700 w-[45%]" title="Školstvo: 45%"></div>
+                    <div class="bg-breza-500 w-[20%]" title="Správa úradu: 20%"></div>
+                    <div class="bg-accent-500 w-[15%]" title="Údržba obce: 15%"></div>
+                    <div class="bg-gray-400 w-[10%]" title="Kultúra a šport: 10%"></div>
+                    <div class="bg-gray-300 w-[10%]" title="Ostatné: 10%"></div>
+                </div>
+
+                <!-- Legend -->
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-4 text-sm">
+                    <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-breza-700"></span> Školstvo (45%)</div>
+                    <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-breza-500"></span> Chod úradu (20%)</div>
+                    <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-accent-500"></span> Údržba (15%)</div>
+                    <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-gray-400"></span> Kultúra, šport (10%)</div>
+                    <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-gray-300"></span> Ostatné (10%)</div>
+                </div>
+
+                <div class="mt-8 p-4 bg-breza-50 rounded-xl border-l-4 border-breza-500">
+                    <p class="text-sm text-gray-700">
+                        <strong>Náš cieľ:</strong> Optimalizovať prevádzkové náklady úradu (znížiť podiel z 20% na 15%) vďaka digitalizácii a zatepleniu obecných budov, a ušetrené prostriedky investovať do údržby a infraštruktúry.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="kontakt" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16">
+                <!-- Form Info -->
+                <div>
+                    <h2 class="text-3xl font-bold text-breza-900 sm:text-4xl mb-4">Zapojte sa. Máte nápad?</h2>
+                    <div class="w-20 h-1 bg-accent-500 rounded-full mb-6"></div>
+                    <p class="text-lg text-gray-600 mb-8">
+                        Brezovicu tvoríme spoločne. Zaujímajú nás vaše názory na to, čo by sa dalo v našej obci zlepšiť. Nechajte nám správu alebo podnet.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-4 text-gray-700">
+                            <svg class="w-6 h-6 text-breza-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                            <span class="font-medium text-lg">kandidati@brezovica2030.sk</span>
+                        </div>
+                        <div class="flex items-center gap-4 text-gray-700">
+                            <svg class="w-6 h-6 text-breza-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                            <span class="font-medium text-lg">Voľby: 24. Október 2026</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="bg-gray-50 rounded-3xl p-8 shadow-inner border border-gray-100">
+                    <form id="contact-form" class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Vaše meno</label>
+                            <input type="text" id="name" required class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-breza-500 focus:border-breza-500 transition-colors bg-white outline-none">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Váš e-mail</label>
+                            <input type="email" id="email" required class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-breza-500 focus:border-breza-500 transition-colors bg-white outline-none">
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Váš nápad / podnet pre obec</label>
+                            <textarea id="message" rows="4" required class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-breza-500 focus:border-breza-500 transition-colors bg-white outline-none"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-breza-700 hover:bg-breza-800 text-white font-bold py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2">
+                            <span>Odoslať podnet</span>
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal for custom form submission notification -->
+    <div id="toast-message" class="fixed bottom-5 right-5 bg-breza-700 text-white px-6 py-4 rounded-xl shadow-2xl transform translate-y-24 opacity-0 transition-all duration-300 z-50 flex items-center gap-3">
+        <svg class="w-6 h-6 text-accent-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        <span class="font-medium">Ďakujeme za váš podnet! Budeme sa mu venovať.</span>
+    </div>
+
+    <footer class="bg-gray-900 text-gray-300 py-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <!-- Logo -->
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 bg-gray-800 text-gray-400 rounded-lg flex items-center justify-center font-bold">B</div>
+                    <span class="font-bold text-lg text-white">Spoločne za Brezovicu</span>
+                </div>
+                
+                <!-- Reminder -->
+                <div class="text-center md:text-left">
+                    <p class="text-sm">Nezávislí kandidáti do obecného zastupiteľstva.</p>
+                    <p class="text-accent-500 font-semibold mt-1">Komunálne voľby: 24. Október 2026</p>
+                </div>
+
+                <!-- Socials -->
+                <div class="flex gap-4">
+                    <a href="#" class="w-10 h-10 rounded-full bg-gray-800 hover:bg-breza-700 flex items-center justify-center transition-colors text-white" aria-label="Facebook">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
+                    </a>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-sm text-gray-500">
+                &copy; 2026 Tím Brezovica 2030. Všetky práva vyhradené. Web prezentácia slúži ako predvolebný materiál.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Navbar scroll effect
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 20) {
+                    navbar.classList.add('shadow-md');
+                } else {
+                    navbar.classList.remove('shadow-md');
+                }
+            });
+
+            // Mobile Menu Toggle
+            const mobileBtn = document.getElementById('mobile-menu-btn');
+            const closeBtn = document.getElementById('close-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+
+            function toggleMenu() {
+                if (mobileMenu.classList.contains('mobile-menu-hidden')) {
+                    mobileMenu.classList.remove('mobile-menu-hidden');
+                    mobileMenu.classList.add('mobile-menu-active');
+                    document.body.style.overflow = 'hidden'; // Prevent scrolling when menu open
+                } else {
+                    mobileMenu.classList.add('mobile-menu-hidden');
+                    mobileMenu.classList.remove('mobile-menu-active');
+                    document.body.style.overflow = '';
+                }
+            }
+
+            mobileBtn.addEventListener('click', toggleMenu);
+            closeBtn.addEventListener('click', toggleMenu);
+            
+            // Close mobile menu on link click
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    toggleMenu();
+                });
+            });
+
+            // Accordion Logic for Vision Section
+            const accordions = document.querySelectorAll('.accordion-btn');
+            
+            accordions.forEach(acc => {
+                acc.addEventListener('click', function() {
+                    const content = this.nextElementSibling;
+                    const icon = this.querySelector('svg');
+                    
+                    // Toggle current
+                    if (content.classList.contains('open')) {
+                        content.classList.remove('open');
+                        icon.classList.remove('rotate-180');
+                    } else {
+                        // Close all others in the same pillar (optional, but good UX)
+                        const siblingAccordions = this.closest('.space-y-4').querySelectorAll('.accordion-content');
+                        const siblingIcons = this.closest('.space-y-4').querySelectorAll('svg');
+                        
+                        siblingAccordions.forEach(sib => sib.classList.remove('open'));
+                        siblingIcons.forEach(sibIcon => sibIcon.classList.remove('rotate-180'));
+                        
+                        content.classList.add('open');
+                        icon.classList.add('rotate-180');
+                    }
+                });
+            });
+
+            // Contact Form Submit Handler (Custom UI instead of alert)
+            const form = document.getElementById('contact-form');
+            const toast = document.getElementById('toast-message');
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault(); // Prevent page reload
+                
+                // Show toast
+                toast.classList.remove('translate-y-24', 'opacity-0');
+                
+                // Reset form
+                form.reset();
+                
+                // Hide toast after 4 seconds
+                setTimeout(() => {
+                    toast.classList.add('translate-y-24', 'opacity-0');
+                }, 4000);
+            });
+        });
+    </script>
+</body>
+</html>
