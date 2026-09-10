@@ -156,7 +156,7 @@
                         <p class="text-accent-600 font-semibold mb-4 text-sm uppercase tracking-wider">Kandidát na poslanca</p>
                         
                         <!-- Krátke BIO -->
-                        <div class="text-gray-600 mb-6 italic">
+                        <div class="kandidat-bio text-gray-600 mb-6 italic">
                             "Za mojich 34 rokov som sa naučil, že chcieť vo veľa prípadoch stačí. Aktívne sa podieľam na športe a organizácii podujatí v obci. Chcem hľadať cesty, ako zefektívniť náš rozpočet a zjednotiť komunitu."
                         </div>
 
@@ -192,7 +192,7 @@
                         <p class="text-accent-600 font-semibold mb-4 text-sm uppercase tracking-wider">Kandidát na poslanca</p>
                         
                         <!-- Krátke BIO -->
-                        <div class="text-gray-600 mb-6 italic">
+                        <div class="kandidat-bio text-gray-600 mb-6 italic">
                             "Do obecného zastupiteľstva nechcem prísť len pomenúvať problémy. Chcem prinášať konkrétne riešenia, nové projekty a moderné technológie, ktoré môžu Brezovicu posúvať dopredu."
                         </div>
 
@@ -228,7 +228,7 @@
                         <p class="text-accent-600 font-semibold mb-4 text-sm uppercase tracking-wider">Kandidát na poslanca</p>
                         
                         <!-- Krátke BIO -->
-                        <div class="text-gray-600 mb-6 italic">
+                        <div class="kandidat-bio text-gray-600 mb-6 italic">
                             "Bez investícií do modernizácie a pripravených projektov sa nepohneme z miesta. Záleží mi na hospodárnom fungovaní a získavaní prostriedkov, ktoré obci prinesú úspory a zatraktívnia ju."
                         </div>
 
@@ -655,6 +655,33 @@
             }
         }
 
+        // Automatické vyrovnanie kariet kandidátov
+        function equalizeBioHeights() {
+            const bios = document.querySelectorAll('.kandidat-bio');
+            
+            // Na mobiloch netreba vyrovnávať, pretože sú pod sebou
+            if(window.innerWidth < 768) {
+                bios.forEach(bio => bio.style.minHeight = '0px');
+                return;
+            }
+            
+            // Najskôr resetujeme výšky
+            bios.forEach(bio => bio.style.minHeight = '0px');
+            
+            // Nájdeme najvyšší text
+            let maxH = 0;
+            bios.forEach(bio => {
+                if(bio.offsetHeight > maxH) maxH = bio.offsetHeight;
+            });
+            
+            // Aplikujeme rovnakú výšku na všetky texty
+            bios.forEach(bio => bio.style.minHeight = maxH + 'px');
+        }
+
+        // Spustíme funkciu po načítaní stránky a pri akejkoľvek zmene veľkosti okna
+        window.addEventListener('load', equalizeBioHeights);
+        window.addEventListener('resize', equalizeBioHeights);
+
         document.addEventListener('DOMContentLoaded', () => {
             // Navbar scroll efekt
             const navbar = document.getElementById('navbar');
@@ -781,6 +808,8 @@
                 });
             });
         });
+
+        
     </script>
 </body>
 </html>
